@@ -5,6 +5,9 @@
  * @type {[*]}
  */
 
+/*
+ * variable con los botones que se usaran para mostrar en la interfaz
+ */
 var Botones = ["7","8","9","+","4","5","6","-",
                 "3","2","1","*","0",".","=","/"];
 
@@ -16,31 +19,37 @@ var ComponenteCalculadora = React.createClass({
         };
     },
 
-    EvaluaColores:function(it){
+    EvaluaColores:function(it) {
+
         var nombreClase='primary';
         var signos = ["+", "-", "*", "/"];
-        if(signos.indexOf(it)>-1){nombreClase='success';}
-        if(it=='='){nombreClase='warning';}
+
+        if(signos.indexOf(it)>-1){
+            nombreClase='success';
+        }
+        if(it=='='){
+            nombreClase='warning';
+        }
         return nombreClase;
     },
 
-    BorrarPantalla:function(){
+    BorrarPantalla:function() {
         this.setState({txtSalida:0});
     },
 
-    EvaluarBotones:function(itemPresionado){
+    EvaluarBotones:function(itemPresionado) {
         var signos = ["+", "-", "*", "/"];
-        var re = new RegExp("^[-]?[0-9]+[.]?[0-9]*[+]?[-]?[*]?[/]?[=]?[0-9]*[.]?[0-9]*$");
-        if(!re.test(this.state.txtSalida)){
+        var re = new RegExp("^[-]?[.]?[0-9]*[.]?[0-9]*[+]?[-]?[*]?[/]?[=]?[0-9]*[.]?[0-9]*$");
+        if(!re.test(this.state.txtSalida)) {
             this.setState({txtSalida:"Error"});
-        }else {
+        } else {
             if (itemPresionado == '=') {
                 console.log("entreee")
-                var re = new RegExp("^[0-9]+[/]+[0]$");
+                var re = new RegExp("^[-]?[.]?[0-9]*[.]?[0-9]*[/]+[0]$");
 
                 if (re.test(this.state.txtSalida)) {
 
-                    this.setState({txtSalida: "Division por 0"});
+                    this.setState({txtSalida: "Error"});
                 }
                 else {
                     this.setState({txtSalida: eval(this.state.txtSalida)});
