@@ -1,4 +1,10 @@
 
+/**
+ * Aplicacion en JSX que usa React JS este archivo debe ser compilado para generar el archivo
+ * en JS puro (se requiere la libreria JSXTransformer como dependencia en el archivo HTML)
+ * @type {[*]}
+ */
+
 var Botones = ["7","8","9","+","4","5","6","-",
                 "3","2","1","*","0",".","=","/"];
 
