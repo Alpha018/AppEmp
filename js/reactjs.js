@@ -29,19 +29,37 @@ var ComponenteCalculadora = React.createClass({
     },
 
     EvaluarBotones:function(itemPresionado){
-    var signos = ["+", "-", "*", "/"];
+        var signos = ["+", "-", "*", "/"];
+        var re = new RegExp("^[-]?[0-9]+[.]?[0-9]*[+]?[-]?[*]?[/]?[=]?[0-9]*[.]?[0-9]*$");
+        if(!re.test(this.state.txtSalida)){
+            this.setState({txtSalida:"Error"});
+        }else {
+            if (itemPresionado == '=') {
+                console.log("entreee")
+                var re = new RegExp("^[0-9]+[/]+[0]$");
 
-    if(itemPresionado=='='){
-        this.setState({txtSalida:eval(this.state.txtSalida)});
-        }else{
-            if((this.state.txtSalida==0)){
-            if(signos.indexOf(itemPresionado)>-1){this.setState({txtSalida:0});}
-            else{this.setState({txtSalida:itemPresionado});}
-            }else{
-                this.setState({txtSalida:this.state.txtSalida+itemPresionado});
-            } 
+                if (re.test(this.state.txtSalida)) {
+
+                    this.setState({txtSalida: "Division por 0"});
+                }
+                else {
+                    this.setState({txtSalida: eval(this.state.txtSalida)});
+                }
+            } else {
+                if ((this.state.txtSalida == 0)) {
+                    console.log(this.state.txtSalida)
+                    if (signos.indexOf(itemPresionado) > -1) {
+                        this.setState({txtSalida: 0});
+                    }
+                    else {
+                        this.setState({txtSalida: itemPresionado});
+                    }
+                } else {
+                    console.log(this.state.txtSalida)
+                    this.setState({txtSalida: this.state.txtSalida + itemPresionado});
+                }
+            }
         }
-
     },
 
     render: function() {
